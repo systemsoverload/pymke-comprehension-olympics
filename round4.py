@@ -7,7 +7,16 @@ in, etc etc.
 
 input = ['the', 'cat', 'in', 'some', 'hat']
 
-output = []
+import itertools
+output = [word for word in
+    reduce(lambda l,l2: l+l2,
+           [
+              [''.join(c) for c in sorted(itertools.permutations(x))]
+              for x in sorted(input)
+           ],
+           []
+    )
+]
 
 expected = ['act', 'atc', 'cat', 'cta', 'tac', 'tca', 'aht', 'ath', 'hat', 'hta', 'tah', 'tha', 'in', 'ni', 'emos', 'emso', 'eoms', 'eosm', 'esmo', 'esom', 'meos', 'meso', 'moes', 'mose', 'mseo', 'msoe', 'oems', 'oesm', 'omes', 'omse', 'osem', 'osme', 'semo', 'seom', 'smeo', 'smoe', 'soem', 'some', 'eht', 'eth', 'het', 'hte', 'teh', 'the']
 
